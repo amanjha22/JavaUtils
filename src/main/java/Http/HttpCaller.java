@@ -76,14 +76,16 @@ public class HttpCaller {
         int statusCode = connection.getResponseCode();
         String responseMessage= connection.getResponseMessage();
 
-        //Read the response
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String inputLine;
+        //Read the response only if response code is 200
         StringBuffer responseString = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            responseString.append(inputLine);
+        if(statusCode==200) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                responseString.append(inputLine);
+            }
+            in.close();
         }
-        in.close();
 
         //Disconnect the connection
         connection.disconnect();
