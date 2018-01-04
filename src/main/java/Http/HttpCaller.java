@@ -78,7 +78,7 @@ public class HttpCaller {
 
         //Read the response only if response code is 200
         StringBuffer responseString = new StringBuffer();
-        if(statusCode==200) {
+        if(statusCode==200 || statusCode==201) {
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
